@@ -50,7 +50,7 @@ char* upl="<html><body>"
 "    <input type=\"file\" name=\"name\">"
 "    <input class=\"button\" type=\"submit\">"
 "</form>";
-//const char build_info[] = " " __DATE__ " " __TIME__ " " __FILE__ ;
+const char* build_info =" " __DATE__ " " __TIME__ " " __FILE__ ;
 
 class MyESP   {
   public:
@@ -203,9 +203,9 @@ class MyESP   {
         webSend(200, "text/json", (char*)json.c_str());
         json = String();
       });
-      //web->on("/version", []() {
-      //    webSend(200, "text/plain", (char*)build_info); 
-      //});
+      web->on("/version", [this]() {
+          webSend(200, "text/plain", (char*)build_info); 
+      });
       web->begin();      
     }
 
