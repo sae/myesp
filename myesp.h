@@ -222,7 +222,11 @@ class MyESP   {
       debug("\n");
       WiFi.hostname(hostname);  
       WiFi.begin(ssid1, pass1);
-      
+      //no reconnect: if esp lost connection, it have to start own AP
+      //so you can connect and take some measures
+      WiFi.setAutoReconnect(true);
+      WiFi.persistent(true);
+     
       pinMode(LED_BUILTIN, OUTPUT);
       while (WiFi.status() != WL_CONNECTED) {
         digitalWrite(LED_BUILTIN, 0);
